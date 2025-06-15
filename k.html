@@ -5,35 +5,67 @@
   <title>完全なトークン対応シンタックスハイライトサンプル</title>
   <style>
     body{
-        background:rgb(12, 12, 12);
+        background:rgb(0, 0, 0);
     }
+h1{
+margin: 0 auto;
+width: 500px;
+color:white;
+
+}
     .box{
+        
         margin: 0 auto;
-        width: 600px;
+        width: 700px;
         
         height:100px;
-        background:#161616;
+        background:#000000;
         border-radius: 10px;
-        border:1px solid gray;
+        border:1px solid rgb(218, 218, 218);
 
     }
+.placeholder{
+
+}
     .in{
         background:none;
         outline: none;
         margin:10px;
         color:rgb(161, 161, 161)
     }
+    .in:empty::before {
+    content: "ここに入力してください";
+    color: gray;
+  }
   </style>
 </head>
 <body>
+  <h1>keitaと話して虚無を手に入れよう</h1>
   <div class ="box">
     
-     <div class="in" contenteditable="true" id = "editable">
+     <div class="in placeholder" contenteditable="true" id = "editable">
      
      </div>
   </div>
   <script>
-  
+  const editableDiv = document.getElementById("editable");
+  if (editableDiv.innerText.trim() === "") {
+     editableDiv .innerText = "ここに入力してください";
+     editableDiv .classList.add("placeholder");
+    }
+  editableDiv.addEventListener("focus", function() {
+    if (this.innerText === "ここに入力してください") {
+      this.innerText = "";
+      this.classList.remove("placeholder");
+    }
+  });
+
+  editableDiv.addEventListener("blur", function() {
+    if (this.innerText.trim() === "") {
+      this.innerText = "ここに入力してください";
+      this.classList.add("placeholder");
+    }
+  });
 </script>
   
 </body>
